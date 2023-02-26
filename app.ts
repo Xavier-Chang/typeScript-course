@@ -2,11 +2,22 @@
 //     name: string;
 //     age: number;
 // } = {
-const person = {
+const person: {
+    name: string;
+    age: number;
+    hobbies: string[];
+    role: [number, string]
+} = {
     name: "Xaver",
     age: 34,
-    hobbies: ["sports", "cooking"]
-}
+    hobbies: ["sports", "cooking"],
+    role: [2, 'coder']
+};
+
+person.role.push('admin') //push is an exception which is allowed in tuples
+//person.role[1] = 10;
+
+//person.role = [0,'admin', 3] --> length is detected
 
 let favouriteActivities: string[];
 favouriteActivities = ['sports']
