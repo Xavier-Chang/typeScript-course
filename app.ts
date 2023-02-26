@@ -2,19 +2,39 @@
 //     name: string;
 //     age: number;
 // } = {
-const person: {
-    name: string;
-    age: number;
-    hobbies: string[];
-    role: [number, string]
-} = {
+// const person: {
+//     name: string;
+//     age: number;
+//     hobbies: string[];
+//     role: [number, string]
+// } = {
+//     name: "Xaver",
+//     age: 34,
+//     hobbies: ["sports", "cooking"],
+//     role: [2, 'coder']
+// };
+
+// set Global variables, JS way
+// const ADMIN = 0;
+// const  = 1;
+// const AUTHOR = 2;
+
+//enum Role {ADMIN, READ_ONLY, AUTHOR}; ==> start from 0
+enum Role {ADMIN = 5, READ_ONLY = 93, AUTHOR = "aur"}; //can assign the custom value
+
+const person = {
     name: "Xaver",
     age: 34,
     hobbies: ["sports", "cooking"],
-    role: [2, 'coder']
+    role: Role.ADMIN
 };
 
-person.role.push('admin') //push is an exception which is allowed in tuples
+if (person.role === Role.AUTHOR) {
+    console.log("is ADMIN");
+}
+
+
+// person.role.push('admin') //push is an exception which is allowed in tuples
 //person.role[1] = 10;
 
 //person.role = [0,'admin', 3] --> length is detected
