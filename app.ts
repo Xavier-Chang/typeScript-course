@@ -6,6 +6,13 @@ function printResult(num: number): void { //return type is void, it doesn't retu
     console.log("Result: " + num);
 }
 
-console.log(printResult(add(5, 12))); //undefinied
+//printResult(add(5, 12));
+//console.log(printResult(add(5, 12))); //undefinied
 
-let someValue: undefined;
+let combineValues: (a: number, b: number) => number;
+ 
+combineValues = add;
+//combineValues = 5;
+//combineValues = printResult; //set type = function is not enough, as it can equal to other function
+
+console.log(combineValues(8, 8));
