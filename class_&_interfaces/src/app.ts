@@ -16,7 +16,7 @@ class Department {
     */
 
     //access modifier   
-    constructor(private id:string, public name: string) {
+    constructor(private readonly id:string, public name: string) { //id sholudn't change, use 'readonly'. Just in TS, not in JS
         
     }
 
@@ -33,6 +33,8 @@ class Department {
         console.log(this.employees.length);
         console.log(this.employees);
     }
+
+    
 }
 
 const accounting = new Department('d1','Accounting');
