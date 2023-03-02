@@ -1,14 +1,27 @@
 class Department {
     //JS just know public, TS supports private
-    public name: string; //public - default, acessible from outside
+    //private name: string; //public - default, acessible from outside
     private employees: string[] = []; //modifier: private - only access inside the class
 
-    constructor(n: string) {
+    /*
+    old method
+    private id: string;
+    private name: string;
+    private employees: string[] = [];
+
+    constructor(id: string, n: string) {
+        this.id = id;
         this.name = n;
+    }    
+    */
+
+    //access modifier   
+    constructor(private id:string, public name: string) {
+        
     }
 
     describe(this: Department) { //When describe is excuted, refer to an instance that's based on the department class
-        console.log('Department: ' + this.name);
+        console.log(`Department (${this.id}): ` + this.name);
     }
 
     addEmployee(employee: string) {
@@ -22,7 +35,7 @@ class Department {
     }
 }
 
-const accounting = new Department('Accounting');
+const accounting = new Department('d1','Accounting');
 
 //no validation
 // accounting.employees[2] = "Melody";// I can add employee outside the class method, not a good way. One uniform way
