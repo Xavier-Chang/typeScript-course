@@ -1,8 +1,8 @@
 class Department {
     //JS just know public, TS supports private
     //private name: string; //public - default, acessible from outside
-    private employees: string[] = []; //modifier: private - only access inside the class
-
+    //private employees: string[] = []; //modifier: private - only access inside the class
+    protected employees: string[] = []; //not just private, every class extends this class
     /*
     old method
     private id: string;
@@ -53,6 +53,13 @@ class AccountingDepartment extends Department {
         super(id, 'Accounting')
     }
 
+    addEmployee(name: string) {
+        if (name === 'Max') {
+            return;
+        }
+        this.employees.push(name)
+    }
+
     addReport(text: string) {
         this.reports.push(text)
     }
@@ -65,6 +72,9 @@ class AccountingDepartment extends Department {
 const accounting = new AccountingDepartment ('d3', [])
 accounting.addReport("Here's the report...")
 accounting.printReport();
+accounting.addEmployee('Max');
+accounting.addEmployee('Cherry');
+accounting.printEmployeeInformation();
 
 // const accounting = new Department('d1','Accounting');
 
