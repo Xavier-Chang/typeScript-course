@@ -37,16 +37,45 @@ class Department {
     
 }
 
-const accounting = new Department('d1','Accounting');
+class ITDepartment extends Department {
+    constructor(id: string, public admins: string[]) {
+        super(id, 'IT');     //super calls the constructor of the base class
+    }
+}
+
+const frontend = new ITDepartment ('d2', ['Xavier', 'Nicole'])
+console.log(frontend);
+frontend.describe();
+frontend.printEmployeeInformation();
+
+class AccountingDepartment extends Department {
+    constructor(id: string, private reports: string[]){
+        super(id, 'Accounting')
+    }
+
+    addReport(text: string) {
+        this.reports.push(text)
+    }
+
+    printReport() {
+        console.log(this.reports);
+    }
+}
+
+const accounting = new AccountingDepartment ('d3', [])
+accounting.addReport("Here's the report...")
+accounting.printReport();
+
+// const accounting = new Department('d1','Accounting');
 
 //no validation
 // accounting.employees[2] = "Melody";// I can add employee outside the class method, not a good way. One uniform way
 
-accounting.addEmployee("Xavier");
-accounting.addEmployee("Winnie")
+// accounting.addEmployee("Xavier");
+// accounting.addEmployee("Winnie")
 
-accounting.describe();
-accounting.printEmployeeInformation();
+// accounting.describe();
+// accounting.printEmployeeInformation();
 
 // const accountingCopy = { name: 'Finance', describe: accounting.describe}
 
