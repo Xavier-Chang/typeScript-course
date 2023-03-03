@@ -1,4 +1,4 @@
-class Department {
+abstract class Department {
   static  fiscalYear = 2020; //can't access in the class by this
   //JS just know public, TS supports private
   //private name: string; //public - default, acessible from outside
@@ -17,7 +17,7 @@ class Department {
     */
 
   //access modifier
-  constructor(private readonly id: string, public name: string) {
+  constructor(protected readonly id: string, public name: string) {
     //id sholudn't change, use 'readonly'. Just in TS, not in JS
     //console.log(Department.fiscalYear); access by the class.variable...
   }
@@ -26,10 +26,11 @@ class Department {
     return {name: name}
   }
 
-  describe(this: Department) {
-    //When describe is excuted, refer to an instance that's based on the department class
-    console.log(`Department (${this.id}): ` + this.name);
-  }
+//   describe(this: Department) {
+//     //When describe is excuted, refer to an instance that's based on the department class
+//     console.log(`Department (${this.id}): ` + this.name);
+//   }
+  abstract describe(this: Department): void; //this method should be implented in every inheritance class, enforce them to follow
 
   addEmployee(employee: string) {
     //validation
@@ -46,7 +47,13 @@ class ITDepartment extends Department {
   constructor(id: string, public admins: string[]) {
     super(id, "IT"); //super calls the constructor of the base class
   }
+
+  describe() {
+    console.log("IT Department - ID: " + this.id);
+  }
 }
+
+
 
 const employee1 = Department.createEmployee('Max')
 console.log("Here", employee1, Department.fiscalYear);
@@ -58,6 +65,7 @@ frontend.printEmployeeInformation();
 
 class AccountingDepartment extends Department {
   private lastReport: string; //it must be empty firstly as no reports in string arr
+  private static instance: AccountingDepartment;
 
   get mostRecentReport() {
     //getter method should return sth
@@ -75,9 +83,21 @@ class AccountingDepartment extends Department {
   }
   
 
-  constructor(id: string, private reports: string[]) {
+  private constructor(id: string, private reports: string[]) { //can just create one accounting dep.
     super(id, "Accounting");
     this.lastReport = reports[0];
+  }
+
+  static getInstance() { //check if we already have this class
+    if (AccountingDepartment.instance) {
+        return this.instance
+    }
+    this.instance = new AccountingDepartment("d3", []); //create the unique instance here
+    return this.instance;
+  }
+
+  describe() {
+      console.log('Accounting Department - ID: ' + this.id);
   }
 
   addEmployee(name: string) {
@@ -97,7 +117,11 @@ class AccountingDepartment extends Department {
   }
 }
 
-const accounting = new AccountingDepartment("d3", []);
+// const accounting = new AccountingDepartment("d3", []);
+const accounting = AccountingDepartment.getInstance();
+//const accounting2 = AccountingDepartment.getInstance(); //can't make a new one, it's same as the previous one
+
+console.log(accounting);
 
 accounting.mostRecentReport = "Year End Report";
 
@@ -109,6 +133,7 @@ accounting.printReport();
 // accounting.addEmployee("Max");
 // accounting.addEmployee("Cherry");
 // accounting.printEmployeeInformation();
+accounting.describe()
 
 // const accounting = new Department('d1','Accounting');
 
