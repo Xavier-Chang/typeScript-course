@@ -1,4 +1,5 @@
 class Department {
+  static  fiscalYear = 2020; //can't access in the class by this
   //JS just know public, TS supports private
   //private name: string; //public - default, acessible from outside
   //private employees: string[] = []; //modifier: private - only access inside the class
@@ -18,6 +19,11 @@ class Department {
   //access modifier
   constructor(private readonly id: string, public name: string) {
     //id sholudn't change, use 'readonly'. Just in TS, not in JS
+    //console.log(Department.fiscalYear); access by the class.variable...
+  }
+
+  static createEmployee(name: string) { //we can access without instantiating this class
+    return {name: name}
   }
 
   describe(this: Department) {
@@ -41,6 +47,9 @@ class ITDepartment extends Department {
     super(id, "IT"); //super calls the constructor of the base class
   }
 }
+
+const employee1 = Department.createEmployee('Max')
+console.log("Here", employee1, Department.fiscalYear);
 
 const frontend = new ITDepartment("d2", ["Xavier", "Nicole"]);
 console.log(frontend);
