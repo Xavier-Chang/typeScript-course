@@ -111,3 +111,15 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10})
+
+//type casting is to make sure TS know that it's specific HTML element, 2 alternative syntax
+// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+
+// userInputElement.value = 'Hi there!'
+
+//if no !
+const userInputElement = document.getElementById('user-input');
+
+if (userInputElement) {
+(userInputElement as HTMLInputElement).value = 'Hi there!'}
