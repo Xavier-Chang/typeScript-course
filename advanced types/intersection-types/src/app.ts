@@ -44,40 +44,70 @@ function printEmployeeInfo(emp: UnknownEmployee) {
 }
 
 printEmployeeInfo(e1);
-printEmployeeInfo({name: 'Ceci', startDate: new Date()});
+printEmployeeInfo({ name: "Ceci", startDate: new Date() });
 
 class Car {
-    drive() {
-        console.log("Driving...");
-    }
+  drive() {
+    console.log("Driving...");
+  }
 }
 
 class Truck {
-    drive() {
-        console.log('Driving a truck...');
-    }
+  drive() {
+    console.log("Driving a truck...");
+  }
 
-    loadCargo(amount: number) {
-        console.log('Loading cargo ...' + amount);
-    }
+  loadCargo(amount: number) {
+    console.log("Loading cargo ..." + amount);
+  }
 }
 
-type Vehicle = Car | Truck
+type Vehicle = Car | Truck;
 
 const v1 = new Car();
 const v2 = new Truck();
 
 function useVehicle(vehicle: Vehicle) {
-    vehicle.drive();
-    // if ("loadCargo" in vehicle) { //there maybe a risk of mistyping of the property
-    //     vehicle.loadCargo(100);
-    // }
-    //instanceOf method - vehicle was created based on the Truck constructor function
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(100);
-    }
+  vehicle.drive();
+  // if ("loadCargo" in vehicle) { //there maybe a risk of mistyping of the property
+  //     vehicle.loadCargo(100);
+  // }
+  //instanceOf method - vehicle was created based on the Truck constructor function
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(100);
+  }
 }
 
 useVehicle(v1);
 useVehicle(v2);
 
+//discriminated unions
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+    type: 'horse';
+  runningSpace: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+//   if ("flyingSpeed" in animal) { interface - no instanceof 
+//     console.log("Moving with speed: " + animal.flyingSpeed);
+//   }
+    let speed;
+    switch (animal.type) { //switch - 100% accurate and can use in interface
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpace;
+            break;
+    }
+    console.log('Moving with speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10})
