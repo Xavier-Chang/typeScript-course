@@ -46,6 +46,12 @@ const fetchedUserData = {
 
 console.log(fetchedUserData?.job?.title);
 
+const userInput = undefined; //hard code as it get data from back-end, sometimes maybe null, ' ' or undefined
+
+const storedData = userInput ?? "DEFAULT"; //|| but if the userInput is undefined, it's truly. "DEFAULT" is fallback. ??-> null and undefined also don't accept
+
+console.log(storedData);
+
 // type UnknownEmployee = Employee | Admin;
 
 // function printEmployeeInfo(emp: UnknownEmployee) {
